@@ -18,9 +18,11 @@ function App() {
   };
 
   const toggleTodo = (id) => { // Function to toggle completed status
+
     setTodos(todos.map(todo =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
     ));
+
   };
 
   const deleteTodo = (id) => { // Function to delete a todo
@@ -39,11 +41,13 @@ function App() {
         />
         <button onClick={addTodo}>Adcionar</button>
       </div>
+      <span className='container'>
       <TodoList
-        todos={todos}
+        todos={todos} 
         onToggle={toggleTodo}
         onDelete={deleteTodo}
       />
+      </span>
       <p>
         {todos.filter(todo => todo.completed).length} de {todos.length} tarefas concluidas
       </p>
