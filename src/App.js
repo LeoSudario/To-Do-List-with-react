@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState} from 'react';
+import TodoList from './components/TodoList';
+import './index.css';
 
 function App() {
+  const [todos, setTodos] = useState([]);
+  const [input, setInput] = useState('');
+  
+  const addTodo = () => {
+    if (input.trim() === '') return;
+    const newTodo = {
+      id: Date.now(),
+      text: input, completed: false};
+      setTodos([...todos, newTodo]);
+      setInput('');
+    };
+
+  const toggleTodo = (id) => {
+    setTodos(todos.map(todo => todo.id === id ? {...todo, completed: !todo.completed} : todo));
+  };
+  
+  const deleteTodo = (id) => {
+    setTodos(todos.filter(todo => todo.id !== id));
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>To-do List</h1>
+      <div className="input-area">
+        <input type="text" placeholder="Digite uma tarefa" value={input} onChange={(e) => setInput(e.target.value)}></input>
+        <button onClick={addTodo}>Adcionar</button>
+      </div>
+
+      <TodoList 
+        todos={todos}
+        onToggle={toggleTodo}
+        onDelete={deleteTodo}
+      />
+
+      <p>
+        {todos.filter(todo => todo.completed).length} de {todos.length} tarefas concluidas
+      </p>
     </div>
-  );
-}
+   )
+  }
+
 
 export default App;
