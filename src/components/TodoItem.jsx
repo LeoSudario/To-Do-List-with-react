@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'; // Import React
 
-function TodoItem({ todo, onToggle, onDelete}) {
+function TodoItem({ todo, onToggle, onDelete }) { // Receives todo and handlers as props
     return (
-        <li className={`todo-item ${todo.completed ? 'completed' : ''}`}>
-            <span onClick={() => onToggle(todo.id)}>{todo.text}</span> 
-            <button onClick={() => onDelete(todo.id)}>Excluir</button>
+        <li className={`todo-item ${todo.completed ? 'completed' : ''}`}> {/* Apply 'completed' class if done */}
+            <span onClick={() => onToggle(todo.id)}>{todo.text}</span>  {/* Text, toggles on click */}
+            <button onClick={() => onDelete(todo.id)}>Excluir</button>  {/* Delete button */}
         </li>
     )
-} 
-export default TodoItem;
+}
+export default TodoItem; // Export TodoItem 
